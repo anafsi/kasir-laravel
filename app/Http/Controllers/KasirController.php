@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransaksiExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Transaksi; // Panggil Model
 
@@ -54,4 +56,13 @@ class KasirController extends Controller
         Transaksi::truncate(); // Hapus semua data
         return back()->with('warning', 'Semua data telah di-reset!');
     }
+    
+    public function downloadExcel()
+    {
+        // Memberi nama file otomatis dengan tanggal hari ini
+        $nama_file = 'Laporan_Kasir_'.date('Y-m-d_H-i').'.xlsx';
+
+        return Excel::download(new TransaksiExport, $nama_file);
+    }
+    
 }

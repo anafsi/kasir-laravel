@@ -63,9 +63,13 @@
             </div>
 
             <div class="mt-auto">
-                <button onclick="konfirmasiReset()" class="btn btn-outline-danger w-100">
-                    <i class="bi bi-trash3-fill"></i> Reset Semua Data
-                </button>
+                 <a href="{{ route('download.excel') }}" class="btn btn-success w-100 mb-2">
+                     <i class="bi bi-file-earmark-excel-fill"></i> Download Laporan Excel
+                 </a>
+
+                 <a href="{{ route('reset') }}" onclick="return confirm('Hapus semua data?')" class="btn btn-outline-danger w-100">
+                   <i class="bi bi-trash3-fill"></i> Reset Semua Data
+                  </a>
             </div>
         </div>
 
