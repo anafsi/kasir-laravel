@@ -115,3 +115,7 @@ sequenceDiagram
     DB-->>API: Success
     API-->>User: Toast "Berhasil Disimpan"
 ```
+## Tampilan Aplikasi
+
+![Mockup Website](preview.png)
+
