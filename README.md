@@ -33,6 +33,30 @@
 
 ---
 
+## 📋 User Stories
+
+User stories mendefinisikan kebutuhan sistem dari perspektif pengguna:
+
+| Sebagai... | Saya ingin... | Agar... |
+| :--- | :--- | :--- |
+| **Kasir** | Melihat daftar transaksi terbaru secara real-time. | Saya bisa memantau pesanan yang masuk. |
+| **Kasir** | Memilih menu makanan/minuman melalui daftar dropdown. | Input data lebih cepat dan tidak terjadi kesalahan penulisan menu. |
+| **Kasir** | Harga barang muncul secara otomatis setelah memilih menu. | Saya tidak perlu menghafal harga atau salah memasukkan nominal. |
+| **Kasir** | Menyimpan transaksi langsung ke server melalui aplikasi HP. | Data tersentralisasi dan bisa diakses oleh admin web di mana saja. |
+
+---
+
+## 🛠️ Software Requirements Specification (SRS)
+
+### **1. Functional Requirements**
+* **FR-01**: Sistem harus mampu menampilkan daftar transaksi dari database melalui API GET.
+* **FR-02**: Sistem harus menyediakan antarmuka dropdown (Spinner) untuk pemilihan menu barang.
+* **FR-03**: Sistem harus mengisi field harga secara otomatis berdasarkan logika mapping di aplikasi Android.
+* **FR-04**: Sistem harus mampu mengirimkan data transaksi baru ke server melalui API POST.
+* **FR-05**: Dashboard web harus mampu mengelola data (CRUD) yang dikirimkan dari perangkat mobile.
+
+---
+
 ## 📊 Arsitektur Sistem
 
 Sistem ini menggunakan arsitektur **Client-Server** berbasis **REST API**. 
