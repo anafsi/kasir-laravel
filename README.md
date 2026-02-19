@@ -1,93 +1,93 @@
-SmartCashier: Integrated Web & Mobile Cashier System
-SmartCashier adalah sistem manajemen kasir terintegrasi yang menggabungkan kekuatan Laravel 11 sebagai sistem manajemen basis data (Backend/Admin) dan Kotlin Native sebagai aplikasi terminal transaksi (Frontend Mobile). Proyek ini dikembangkan sebagai bagian dari tugas akademik di Politeknik Siber dan Sandi Negara.
+# SmartCashier: Integrated Web & Mobile Cashier System
 
-🚀 Fitur Utama
-Web Dashboard (Laravel)
-Manajemen Data Transaksi: Melihat, menambah, dan mengelola data riwayat penjualan secara terpusat.
 
-RESTful API Server: Menyediakan endpoint JSON untuk komunikasi data dengan aplikasi mobile.
 
-Database Integration: Menggunakan MySQL untuk penyimpanan data yang persisten dan aman.
+**SmartCashier** adalah sistem manajemen kasir terintegrasi yang menggabungkan kekuatan **Laravel 11** sebagai sistem manajemen basis data (Backend/Admin) dan **Kotlin Native** sebagai aplikasi terminal transaksi (Frontend Mobile). Proyek ini dikembangkan sebagai bagian dari tugas akademik
 
-Mobile App (Kotlin Native)
-Native Performance: Dibangun menggunakan kodingan Kotlin murni untuk kecepatan dan responsivitas maksimal.
+---
 
-Real-time Data Sync: Mengambil data transaksi dari server menggunakan library Retrofit.
+## 🚀 Fitur Utama
 
-Smart Selection: Fitur dropdown menu dengan kalkulasi harga otomatis untuk meminimalisir kesalahan input.
+### **Web Dashboard (Laravel)**
+* **Manajemen Data Transaksi**: Melihat, menambah, dan mengelola data riwayat penjualan secara terpusat.
+* **RESTful API Server**: Menyediakan endpoint JSON untuk komunikasi data dengan aplikasi mobile menggunakan Laravel.
+* **Database Integration**: Menggunakan MySQL untuk penyimpanan data yang persisten dan aman.
 
-POST Transaction: Mengirim data pesanan baru langsung ke server Laravel melalui jaringan internet.
+### **Mobile App (Kotlin Native)**
+* **Native Performance**: Dibangun menggunakan kodingan Kotlin murni untuk kecepatan dan responsivitas maksimal.
+* **Real-time Data Sync**: Mengambil data transaksi dari server secara asinkron menggunakan library **Retrofit**.
+* **Smart Selection (Spinner)**: Fitur *dropdown* menu dengan kalkulasi harga otomatis untuk meminimalisir kesalahan input manual.
+* **POST Transaction**: Mengirim data pesanan baru langsung ke server Laravel melalui jaringan internet menggunakan metode POST.
 
-Gemini berkata
-Tentu, Muhammad Agung. File README.md adalah wajah dari repositori GitHub Anda. Dosen atau calon rekruter akan melihat ini pertama kali untuk menilai kualitas kerja Anda.
+---
 
-Berikut adalah draf file README.md yang profesional, terstruktur, dan sudah mencakup penjelasan teknis tentang integrasi Laravel-Kotlin yang Anda buat.
+## 🛠️ Tech Stack
 
-SmartCashier: Integrated Web & Mobile Cashier System
-SmartCashier adalah sistem manajemen kasir terintegrasi yang menggabungkan kekuatan Laravel 11 sebagai sistem manajemen basis data (Backend/Admin) dan Kotlin Native sebagai aplikasi terminal transaksi (Frontend Mobile). Proyek ini dikembangkan sebagai bagian dari tugas akademik di Politeknik Siber dan Sandi Negara.
+| Komponen | Teknologi |
+| :--- | :--- |
+| **Backend** | Laravel 11 (PHP 8.x) |
+| **Frontend Mobile** | Kotlin Native (Android SDK) |
+| **Database** | MySQL / MariaDB |
+| **API Client** | Retrofit 2 & GSON Converter |
+| **Server** | Apache (XAMPP) |
 
-🚀 Fitur Utama
-Web Dashboard (Laravel)
-Manajemen Data Transaksi: Melihat, menambah, dan mengelola data riwayat penjualan secara terpusat.
+---
 
-RESTful API Server: Menyediakan endpoint JSON untuk komunikasi data dengan aplikasi mobile.
+## 📊 Arsitektur Sistem
 
-Database Integration: Menggunakan MySQL untuk penyimpanan data yang persisten dan aman.
+Sistem ini menggunakan arsitektur **Client-Server** berbasis **REST API**. 
 
-Mobile App (Kotlin Native)
-Native Performance: Dibangun menggunakan kodingan Kotlin murni untuk kecepatan dan responsivitas maksimal.
+### **Use Case Diagram**
 
-Real-time Data Sync: Mengambil data transaksi dari server menggunakan library Retrofit.
+```mermaid
+graph LR
+    %% Definisi Aktor
+    User((Kasir / User))
+    Server(Server Laravel)
 
-Smart Selection: Fitur dropdown menu dengan kalkulasi harga otomatis untuk meminimalisir kesalahan input.
+    subgraph "Sistem SmartCashier (Android App)"
+        UC1([Lihat Riwayat Transaksi])
+        UC2([Pilih Menu & Lihat Harga])
+        UC3([Input Nama & Status])
+        UC4([Simpan Transaksi Baru])
+    end
 
-POST Transaction: Mengirim data pesanan baru langsung ke server Laravel melalui jaringan internet.
+    %% Relasi Aktor ke Use Case
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC4
 
-🛠️ Tech Stack
-Komponen	Teknologi
-Backend	Laravel 11 (PHP 8.x)
-Frontend Mobile	Kotlin Native (Android SDK)
-Database	MySQL / MariaDB
-API Client	Retrofit 2 & GSON Converter
-UI Design	XML Layout & Material Design
+    %% Relasi Use Case ke Server
+    UC1 -.->|API GET| Server
+    UC4 -.->|API POST| Server
 
-Sistem ini menggunakan arsitektur Client-Server berbasis REST API.
+    %% Styling agar lebih rapi
+    style User fill:#f9f,stroke:#333,stroke-width:2px
+    style Server fill:#69f,stroke:#333,stroke-width:2px
+    style UC1 fill:#fff,stroke:#333
+    style UC2 fill:#fff,stroke:#333
+    style UC3 fill:#fff,stroke:#333
+    style UC4 fill:#fff,stroke:#333
+```
+
+### **Activity Diagram**
+```mermaid
 sequenceDiagram
     participant User as Kasir (Android)
     participant API as Laravel API
     participant DB as MySQL Database
 
-    User->>API: GET /api/transaksi (Request Data)
+    Note over User, DB: Inisialisasi Aplikasi
+    User->>API: GET /api/transaksi
     API->>DB: Query data terbaru
-    DB-->>API: Result set
+    DB-->>API: Data Transaksi
     API-->>User: Response JSON (List Transaksi)
 
-    User->>API: POST /api/transaksi (Kirim Pesanan)
+    Note over User, DB: Proses Transaksi Baru
+    User->>User: Pilih Menu & Isi Nama
+    User->>API: POST /api/transaksi (Data Baru)
     API->>DB: Insert into table transaksis
-    DB-->>API: Success Response
+    DB-->>API: Success
     API-->>User: Toast "Berhasil Disimpan"
-
-⚙️ Cara Instalasi
-1. Konfigurasi Backend (Laravel)
-Clone repositori ini.
-
-Jalankan composer install.
-
-Duplikat file .env.example menjadi .env dan sesuaikan konfigurasi database.
-
-Jalankan migrasi: php artisan migrate.
-
-Aktifkan fitur API: php artisan install:api.
-
-Jalankan server: php artisan serve --host=0.0.0.0.
-
-2. Konfigurasi Frontend (Android)
-Buka folder AndroidProject menggunakan Android Studio.
-
-Buka MainActivity.kt.
-
-Ubah variabel ipLaptop sesuai dengan alamat IPv4 laptop Anda (cek melalui ipconfig di CMD).
-
-Pastikan HP Android dan Laptop berada dalam satu jaringan Wi-Fi yang sama.
-
-Build dan Run aplikasi.
+```
